@@ -1,0 +1,838 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Something...</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #050B1B;
+    --purple: #A9B8FF;
+    --gold: #EAD09A;
+    --white: #F8F7FF;
+    --muted: #B8C4DF;
+    --panel: #0D1730;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+#stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.star {
+    position: absolute;
+    color: #FFF1C7;
+    text-shadow: 0 0 6px #A9B8FF;
+    animation: twinkle 2.5s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .15; transform: scale(.7); }
+    to { opacity: .9; transform: scale(1.2); }
+}
+
+nav {
+    position: relative;
+    z-index: 6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 7%;
+    border-bottom: 1px solid #ffffff16;
+}
+
+.logo {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 11px;
+    margin-left: 15px;
+}
+
+nav a:hover { color: var(--purple); }
+
+section {
+    padding: 90px 7%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(ellipse at 50% 40%, #243C7838, transparent 65%),
+        radial-gradient(ellipse at 90% 90%, #8D9EFF12, transparent 45%);
+}
+
+.eyebrow {
+    border: 1px solid #ead09a60;
+    color: var(--gold);
+    padding: 10px 18px;
+    border-radius: 40px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 28px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 10vw, 105px);
+    font-weight: 500;
+    line-height: 1.12;
+}
+
+h1 span, h2 span {
+    color: var(--purple);
+    font-style: italic;
+}
+
+.hero p {
+    max-width: 450px;
+    margin: 25px 0 30px;
+    line-height: 1.9;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.button {
+    display: inline-block;
+    border: 1px solid var(--purple);
+    background: var(--purple);
+    color: #100b1c;
+    border-radius: 4px;
+    padding: 14px 23px;
+    font-size: 12px;
+    font-family: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.button:hover {
+    transform: translateY(-3px);
+    background: #d0baff;
+    box-shadow: 0 5px 25px #ad8aff30;
+}
+
+.hint {
+    color: #8c829f;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 25px;
+}
+
+.kicker {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 6vw, 55px);
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+.subtitle {
+    max-width: 500px;
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 13px;
+    margin: 0 auto 40px;
+}
+
+.feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 900px;
+    align-items: center;
+    margin: auto;
+    text-align: left;
+}
+
+.photo {
+    background: linear-gradient(145deg, #483465, #171121, #a38acb);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ad8aff40;
+}
+
+.photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.feature-photo { height: 450px; }
+
+.photo-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--navy-blue);
+    font-family: 'Playfair Display', serif;
+}
+
+.photo-fallback strong { font-size: 65px; }
+.photo-fallback small {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+}
+
+.feature-copy h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+.feature-copy p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 2;
+    margin-bottom: 18px;
+}
+
+.line {
+    width: 45px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 25px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 950px;
+    margin: auto;
+}
+
+.card {
+    padding: 12px;
+    background: var(--panel);
+    border: 1px solid #ffffff12;
+    text-align: left;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    border-color: #ad8aff80;
+}
+
+.card .photo { height: 300px; }
+
+.card-label {
+    color: var(--gold);
+    font-size: 9px;
+    letter-spacing: 3px;
+    margin-top: 18px;
+}
+
+.card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 23px;
+    margin: 8px 0;
+}
+
+.card p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+
+.music-section {
+    background:
+        radial-gradient(ellipse at 50% 100%, #263D7028, transparent 65%),
+        #080F22;
+}
+}
+
+.music-card {
+    max-width: 620px;
+    margin: auto;
+    background: var(--panel);
+    border: 1px solid #ffffff1c;
+    padding: 25px;
+    text-align: left;
+}
+
+.spotify-embed {
+    display: block;
+    width: 100%;
+    height: 352px;
+    border: none;
+    border-radius: 12px;
+    background: #171323;
+}
+
+@media (max-width: 700px) {
+    .spotify-embed {
+        height: 352px;
+    }
+}
+
+
+.album {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 25px;
+}
+
+.album-art {
+    flex-shrink: 0;
+    width: 95px;
+    height: 95px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #b39bdf, #282039 70%, #d9bd83);
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+}
+
+.album small {
+    color: var(--gold);
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+.album h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin: 8px 0;
+}
+
+.album p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.track {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    padding: 18px 0;
+    border-top: 1px solid #ffffff15;
+    font-size: 12px;
+}
+
+.track a {
+    color: var(--purple);
+    text-decoration: none;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.track a:hover { color: var(--gold); }
+
+.track-num {
+    color: var(--gold);
+    margin-right: 12px;
+}
+
+.music-note {
+    font-size: 10px;
+    color: #8c829f;
+    margin-top: 15px;
+    line-height: 1.8;
+}
+
+.letter-section {
+    background:
+        radial-gradient(ellipse at 50% 0%, #263D7028, transparent 65%);
+}
+
+.letter {
+    max-width: 650px;
+    margin: auto;
+    padding: clamp(25px, 6vw, 50px);
+    background: #171321;
+    border: 1px solid #ad8aff40;
+    color: #d7d0e3;
+    text-align: left;
+    white-space: pre-line;
+    line-height: 2.1;
+    font-size: 13px;
+}
+
+.letter strong {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.letter .signoff {
+    color: var(--purple);
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+}
+
+.secret { margin-top: 30px; }
+
+#secretMessage {
+    display: none;
+    max-width: 500px;
+    margin: 25px auto 0;
+    padding: 30px;
+    background: #20182f;
+    border: 1px solid #ad8aff60;
+    color: var(--muted);
+    line-height: 2;
+    font-size: 13px;
+    animation: appear .5s ease;
+}
+
+#secretMessage h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.final {
+    background: #070D1D;
+}
+
+.final p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
+}
+
+footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 28px 15px;
+    border-top: 1px solid #ffffff12;
+    color: #8c829f;
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 2;
+}
+
+.heart {
+    color: var(--purple);
+    display: inline-block;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    50% { transform: scale(1.3); }
+}
+
+@media(max-width: 700px) {
+    nav { padding: 20px 5%; }
+    nav a { font-size: 9px; margin-left: 9px; }
+    .logo { font-size: 10px; letter-spacing: 1px; }
+    section { padding: 70px 6%; }
+    .feature { grid-template-columns: 1fr; gap: 28px; }
+    .feature-photo { height: 400px; }
+    .gallery { grid-template-columns: 1fr; max-width: 400px; }
+    .card .photo { height: 380px; }
+    .music-card { padding: 18px; }
+    .album-art { width: 75px; height: 75px; }
+    .album h3 { font-size: 23px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<nav>
+    <div class="logo">JK ★ GOLDEN</div>
+    <div>
+        <a href="#jungkook">JUNGKOOK</a>
+        <a href="#gallery">GALLERY</a>
+        <a href="#letter">LETTER</a>
+    </div>
+</nav>
+
+<!-- BIRTHDAY OPENING -->
+<section class="hero" id="home">
+    <div class="eyebrow">✦ A SPECIAL DAY FOR LJ ✦</div>
+
+    <h1>Happy Birthday,<br><span>LJ !!! ♡</span></h1>
+
+    <p>
+        A little Jungkook-inspired corner of the universe,
+        made for someone who deserves her own golden day.
+        Even when friends are far apart, there's always
+        a way to make someone smile. 💜
+    </p>
+
+    <a class="button" href="#jungkook">OPEN YOUR SURPRISE ✨</a>
+
+    <div class="hint">SCROLL DOWN TO ENTER YOUR GOLDEN ERA ↓</div>
+</section>
+
+<!-- JUNGKOOK SECTION -->
+<section id="jungkook">
+    <div class="kicker">01 — THE GOLDEN MAKNAE</div>
+    <h2>Today's star is <span>Jung Kook.</span></h2>
+
+    <p class="subtitle">
+        A little space dedicated to LJ's favorite idol,
+        because birthdays deserve a little extra magic.
+    </p>
+
+    <div class="feature">
+        <div class="photo feature-photo">
+            <div class="photo-fallback">
+                <strong>JK</strong>
+                <small>GOLDEN ERA</small>
+            </div>
+            <img src="https://i.pinimg.com/736x/41/08/92/4108922e92b3cdf2ad8d6990e8f1af7f.jpg"
+                 alt="Concert-inspired portrait"
+                 onerror="this.style.display='none'">
+        </div>
+
+        <div class="feature-copy">
+            <div class="line"></div>
+            <div class="kicker">JEON JUNGKOOK · BTS</div>
+            <h3>Your favorite star !💙</h3>
+
+            <p>
+                Today is a very special day
+                for you LJ, and because it's your special day
+                I wanted to make you something that you can keep forever.
+            </p>
+
+            <p>
+                Today, I want you to know that no matter the distance
+                or circumstances, you are cherished and celebrated !
+            </p>
+
+            <p style="color:var(--gold);letter-spacing:2px;font-size:10px">
+                MADE ESPECIALLY FOR YOU 
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section id="gallery">
+    <div class="kicker">02 — THE PHOTOBOOK</div>
+    <h2>Welcome to the <span>LJ zone.</span></h2>
+
+    <p class="subtitle">
+        Three little frames with some of your favorite stuff !
+    </p>
+
+    
+<!-- PHOTO GALLERY -->
+<section id="gallery">
+    <div class="kicker">02 — THE PHOTOBOOK</div>
+    <h2>Welcome to the <span>LJ zone.</span></h2>
+
+    <p class="subtitle">
+        A little collection of the people and artists who make you happy. 💙
+    </p>
+
+    <!-- FIRST 3 PHOTOS: FRIENDS -->
+    <h2 style="margin-bottom: 30px;">Your favorite <span>Memories</span> ♡</h2>
+
+    <div class="gallery">
+
+        <div class="card">
+            <div class="photo">
+                <img src="https://scontent-mnl3-2.xx.fbcdn.net/v/t1.15752-9/864782134_1141742468369965_3469941512276109965_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=s44kJddU_MMQ7kNvwE6bgYh&_nc_oc=AdpVbKJLsnOUiSMmqyRO-fwr8nrl6AExC5d7H6isI-q2-altoC3cyg9PHh7SAY64Q90&_nc_zt=23&_nc_ht=scontent-mnl3-2.xx&_nc_ss=7baaf&oh=03_Q7cD6wHrMCto_-d-yyJ6mJrN75fx3CUneam1rB216ljPzZfLzA&oe=6B0A8C12"
+                     alt="LJ and her friends">
+            </div>
+            <div class="card-label">PHOTOBOOK 001</div>
+            <h3>Pasikatmon dayss </h3>
+            <p>Best school year? OFCC</p>
+        </div>
+
+        <div class="card">
+            <div class="photo">
+                <img src="https://scontent-mnl3-3.xx.fbcdn.net/v/t1.15752-9/867481624_1479893657323349_5329164178219821663_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=MGbwdyKpljAQ7kNvwEYQgZD&_nc_oc=AdqMiX0xrudRMOEfoYr1FRxw4gD4CsTMt3v0uS7Zfef-NBhBf4v-z7HFwHoL3BObpiI&_nc_zt=23&_nc_ht=scontent-mnl3-3.xx&_nc_ss=7baaf&oh=03_Q7cD6wE_9KN4dNRS6TifC9eKJkXBeCnegz26GxwsrUyB_qEc2g&oe=6B0A5AD5">
+            </div>
+            <div class="card-label">PHOTOBOOK 002</div>
+            <h3>Biktima natagpuang patay HAHAHA</h3>
+            <p>Babala, sensatibong imahe, JOKE</p>
+        </div>
+
+        <div class="card">
+            <div class="photo">
+                <img src="https://scontent-mnl3-3.xx.fbcdn.net/v/t1.15752-9/870524908_1995061611134019_1686818592898880199_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=wR2NJWNybykQ7kNvwFOaHVm&_nc_oc=AdqfqvirX6aETo3163LH1RQCglWTkbQiNpcoUk9yrkTLnfZQnAexKe1mO1otLHQ1Efw&_nc_zt=23&_nc_ht=scontent-mnl3-3.xx&_nc_ss=7baaf&oh=03_Q7cD6wE1Bm0cwbxOvUuH-bAUx97KVCNkv4QJGRD2AkevGiPpqw&oe=6B0A7270"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="card-label">PHOTOBOOK 003</div>
+            <h3> Your current trioo </h3>
+            <p>For the laughs, the stories, and the good times</p>
+        </div>
+
+    </div>
+
+    <!-- LAST 3 PHOTOS: BTS MEMBERS -->
+    <h2 style="margin: 80px 0 30px;">Your favorite <span>BTS boys.</span> 💜</h2>
+
+    <div class="gallery">
+
+        <div class="card">
+            <div class="photo">
+                <img src="https://i.pinimg.com/736x/f5/58/8f/f5588f983c2b4f3e5e22e549b04fc85f.jpg"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="card-label">PHOTOBOOK 004</div>
+            <h3>Jeon Jung-kook</h3>
+            <p>Your TOP 1, of all the BTS members !</p>
+        </div>
+
+        <div class="card">
+            <div class="photo">
+                <img src="https://i.pinimg.com/736x/8e/89/44/8e894418ba96e59672ccc9327023d71d.jpg"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="card-label">PHOTOBOOK 005</div>
+            <h3>Taehyung</h3>
+            <p>V or papa deep voice </p>
+        </div>
+
+        <div class="card">
+            <div class="photo">
+                <img src="https://i.pinimg.com/736x/b2/85/eb/b285eb0f7430dd51e430b10cc8b580e4.jpg"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="card-label">PHOTOBOOK 006</div>
+            <h3>Namjoon</h3>
+            <p>The leader with a heart of blue </p>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<!-- SECTION 03: SPOTIFY PLAYLIST -->
+<section class="music-section" id="music">
+    <div class="kicker">03 — SOUNDTRACK OF THE DAY</div>
+
+    <h2>LJ's <span>playlist.</span></h2>
+
+    <p class="subtitle">
+        A little collection of songs for your special day. 💜
+    </p>
+
+    <div class="music-card">
+        <iframe
+            class="spotify-embed"
+            src="https://open.spotify.com/embed/playlist/3e6YrgD7vbBFLVZ6e8QPP6"
+            width="100%"
+            height="352"
+            style="border-radius: 12px; border: none;"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="LJ's Spotify Playlist">
+        </iframe>
+    </div>
+</section>
+
+<!-- LETTER -->
+<section class="letter-section" id="letter">
+    <div class="kicker">04 — A MESSAGE JUST FOR YOU</div>
+    <h2>Dear <span>LJ,</span> ♡</h2>
+
+    <p class="subtitle">
+        A few words for your special day.
+    </p>
+
+    <div class="letter"><strong>Happy birthday, LJ!! 💙</strong>
+
+Heyyy Lj, today is your special day and I hope you have the best birthday ever! I know we can't be together to celebrate, but I wanted to make sure you know that you're always cared for and appreciated.
+
+I made this little website for your birthday to have something that feels a little more personal. Since i know how much you love BTS, and how much you love Jung-kook, I thought this would be a cute way to make you smile.
+
+I remember how sad you were when you thought that not too many people might come to your birthday later. I just want you to know that regardless of the distance, there are people who care about you and want to celebrate your special day. You are loved and appreciated more than you know.
+
+I can only imagine how stressed you've been lately because of all the responsibilities, task, and schoolwork. I hope that today, you can take a break from all of that and just enjoy yourself. You deserve to have a day where you can relax, have fun, and feel loved.
+
+Even if life gets busy and we can't always hangout, I hope you remember that distance doesn't erase the people who care about you. There will always be little ways to show someone they're loved.
+
+Keep being yourself no matter what other people might say, keep chasing your dreams, and keep finding things that make you happy. You deserve a year full of great memories.
+
+Here's to more laughs, more adventures, and more birthdays to celebrate!
+
+<span class="signoff">With care, Jiniya ♡</span></div>
+
+    <div class="secret">
+        <button class="button" onclick="revealSecret()">
+            ONE LAST SURPRISE ✦
+        </button>
+
+        <div id="secretMessage">
+            <h3>You're in your GOLDEN era <br>
+                [oo pinag aralan ko si jung-kook]♡</h3>
+
+            I hope you never forget that your own story
+            deserves to shine just as brightly as the people
+            you admire.
+
+            May your days be filled with joy and laughter.
+
+            Happy birthday, LJ! Amoo-haeng-al? 
+
+            <br><br>
+            <span style="color:var(--gold);letter-spacing:2px">
+                YOU ARE SOMEONE'S REASON TO SMILE.
+            </span>
+        </div>
+    </div>
+</section>
+
+<!-- ENDING -->
+<section class="final">
+    <div class="kicker">END OF THE PAGE · NOT THE MEMORIES</div>
+    <h2>Stay <span>golden,</span> LJ.</h2>
+
+    <p>
+        May your next chapter in life be as unforgettable<br>
+        as your favorite Jungkook era. 💙
+    </p>
+
+    <br>
+    <a href="#home" class="button">BACK TO THE TOP ↑</a>
+</section>
+
+<footer>
+    MADE WITH <span class="heart">♥</span> FOR LJ
+    <br>
+    MADE FOR A FAN BIRTHDAY GIFT · NOT AN OFFICIAL BTS WEBSITE
+</footer>
+
+<script>
+// CREATE TWINKLING STARS
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 65; i++) {
+    const star = document.createElement("span");
+
+    star.className = "star";
+    star.textContent = Math.random() > 0.5 ? "✦" : "·";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.fontSize = (Math.random() * 15 + 6) + "px";
+    star.style.animationDelay = Math.random() * 4 + "s";
+
+    stars.appendChild(star);
+}
+
+// REVEAL THE SECRET MESSAGE
+function revealSecret() {
+    const message = document.getElementById("secretMessage");
+
+    if (message.style.display === "block") {
+        message.style.display = "none";
+        return;
+    }
+
+    message.style.display = "block";
+
+    message.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    // PURPLE AND GOLD CONFETTI
+    for (let i = 0; i < 35; i++) {
+        const particle = document.createElement("span");
+
+        particle.textContent = ["✦", "♡", "✧", "★"][
+            Math.floor(Math.random() * 4)
+        ];
+
+        particle.style.position = "fixed";
+        particle.style.left = Math.random() * 100 + "vw";
+        particle.style.top = "-25px";
+        particle.style.zIndex = "100";
+        particle.style.pointerEvents = "none";
+        particle.style.color =
+            Math.random() > 0.5 ? "#ad8aff" : "#ead09a";
+        particle.style.fontSize = "20px";
+        particle.style.transition =
+            "transform 3s linear, opacity 3s linear";
+
+        document.body.appendChild(particle);
+
+        requestAnimationFrame(() => {
+            particle.style.transform =
+                `translateY(${window.innerHeight + 50}px) rotate(480deg)`;
+            particle.style.opacity = "0";
+        });
+
+        setTimeout(() => particle.remove(), 3100);
+    }
+}
+</script>
+
+</body>
+</html>
